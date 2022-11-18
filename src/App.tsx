@@ -1,17 +1,17 @@
 import React from 'react'
 
-const alphabetButtons: [] = [26]
-
-Array(25)
+const alphabet = Array(26)
   .fill(null)
   .map((_, i) => i)
-console.log(Array)
+console.log(alphabet)
 
 export function App() {
   return (
     <div>
       <h1>Do you want to build a snowman?</h1>
-      <main></main>
+      <main className="d-flex">
+        <img src="/snowman-images/step_7.png" height="300px"></img>
+      </main>
     </div>
   )
 }

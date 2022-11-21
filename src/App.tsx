@@ -1,14 +1,14 @@
 import React from 'react'
 
-const alphabet = Array.from(Array(26).keys())
-
 function AlphabetCreator() {
-  const newAlphabet = alphabet.map((letter) => (
+  const alphaArray = Array.from(Array(26)).map((e, i) => i + 65)
+  const alphabet = alphaArray.map((x) => String.fromCharCode(x))
+  const liAlphabet = alphabet.map((letter) => (
     <li key={letter}>
       <button>{letter}</button>
     </li>
   ))
-  return <ul>{newAlphabet}</ul>
+  return <ul>{liAlphabet}</ul>
 }
 
 export function App() {

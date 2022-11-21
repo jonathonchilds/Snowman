@@ -1,13 +1,11 @@
 import React from 'react'
 
-const alphabet = Array(26)
-  .fill(null)
-  .map((_, i) => i)
+const alphabet = Array.from(Array(26).keys())
 
 function AlphabetCreator() {
   const newAlphabet = alphabet.map((letter) => (
     <li key={letter}>
-      <button key={letter}>{letter}</button>
+      <button>{letter}</button>
     </li>
   ))
   return <ul>{newAlphabet}</ul>

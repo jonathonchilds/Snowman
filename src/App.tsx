@@ -1,17 +1,7 @@
 import React, { useState } from 'react'
 import wordsArray from './words.json'
 
-const [game, setGame] = useState<Game>({
-  board: ['', '', '', '', '', '', ''],
-  winner: undefined,
-  state: undefined,
-})
-
 const randomWord = wordsArray[Math.floor(Math.random() * wordsArray.length)]
-type Game = {
-  state: string | undefined
-  winner: string | undefined
-}
 
 // function RandomWordGenerator() {
 
@@ -27,26 +17,27 @@ function AlphabetGenerator() {
   const alphabet = alphaArray.map((x) => String.fromCharCode(x))
   const liAlphabet = alphabet.map((letter) => (
     <li key={letter}>
-      <button>{letter}</button>
+      <button onClick={setGame}>{letter}</button>
     </li>
   ))
   return <ul>{liAlphabet}</ul>
 }
 
 export function App() {
+  const [game, setGame] = useState(0)
   return (
     <>
       <h1>Do you want to build a snowman?</h1>
       <main className="d-flex">
         <img src="/snowman-images/step_7.png" height="300px"></img>
         <ul>
-          <li>Li</li>
-          <li>Li</li>
-          <li>Li</li>
-          <li>Li</li>
-          <li>Li</li>
-          <li>Li</li>
-          <li>Li</li>
+          <li>{game}</li>
+          <li>{game}</li>
+          <li>{game}</li>
+          <li>{game}</li>
+          <li>{game}</li>
+          <li>{game}</li>
+          <li>{game}</li>
         </ul>
         <AlphabetGenerator />
       </main>
@@ -56,6 +47,13 @@ export function App() {
 
 //  I'm trying to determine if a word returned by RandomWordGenerator is equal to what is guessed by the user,
 //  via the user pushing buttons.
-//  probably contained
-//  within a list, the number of buttons equal to the length of the word
 //
+//  How to get each button to recognize it's own value representation?
+//
+//  Compare each button press to if that value is contained within .randomWord: string
+//
+//  If it is, identify where (and grab that letter's index from .randomWord)
+//
+//  Method to return the index number of where a button matches a letter within .randomWord
+//
+//  Display the letter (with the corresponding index) on the game board

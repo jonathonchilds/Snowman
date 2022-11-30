@@ -12,21 +12,15 @@ function randomWord() {
 //   // )
 // }
 
-function numsToUTF16Transformer() {
-  return Array.from(Array(26)).map((e, i) => i + 65)
-}
-
 function AlphabetButtons() {
   const assignKey = (event) => {
+    event.currentTarget.disabled = true
     const id = event.target.innerText
     console.log(id)
   }
 
-  const disableButton = (event) => {
-    assignKey((event.currentTarget.disabled = true))
-  }
-
-  const liAlphabet = numsToUTF16Transformer()
+  const liAlphabet = Array.from(Array(26))
+    .map((e, i) => i + 65)
     .map((x) => String.fromCharCode(x))
     .map((letter) => (
       <li key={letter}>

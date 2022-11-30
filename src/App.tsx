@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import wordsArray from './words.json'
 
-const randomWord = wordsArray[Math.floor(Math.random() * wordsArray.length)]
+function randomWord() {
+  return wordsArray[Math.floor(Math.random() * wordsArray.length)]
+}
 // function RandomWordGenerator() {
 //   // return (
 //   //   <ul>
@@ -15,34 +17,40 @@ function numsToUTF16Transformer() {
 }
 
 function AlphabetButtons() {
-  const disableButton = (event) => {
-    event.currentTarget.disabled = true
+  const assignKey = (event) => {
+    const id = event.target.innerText
+    console.log(id)
   }
-  const alphabet = numsToUTF16Transformer().map((x) => String.fromCharCode(x))
-  const liAlphabet = alphabet.map((letter) => (
-    <li key={letter}>
-      <button onClick={disableButton}>{letter}</button>
-    </li>
-  ))
+
+  const disableButton = (event) => {
+    assignKey((event.currentTarget.disabled = true))
+  }
+
+  const liAlphabet = numsToUTF16Transformer()
+    .map((x) => String.fromCharCode(x))
+    .map((letter) => (
+      <li key={letter}>
+        <button onClick={assignKey}>{letter}</button>
+      </li>
+    ))
   return <ul>{liAlphabet}</ul>
 }
 
 export function App() {
-  const [game, setGame] = useState(0)
   return (
     <>
       <h1>Do you want to build a snowman?</h1>
       <main className="d-flex">
         <img src="/snowman-images/step_7.png" height="300px"></img>
-        <div>{randomWord}</div>
+        <div>{randomWord()}</div>
         <ul>
-          <li>{game}</li>
-          <li>{game}</li>
-          <li>{game}</li>
-          <li>{game}</li>
-          <li>{game}</li>
-          <li>{game}</li>
-          <li>{game}</li>
+          <li>_</li>
+          <li>_</li>
+          <li>_</li>
+          <li>_</li>
+          <li>_</li>
+          <li>_</li>
+          <li>_</li>
         </ul>
         <AlphabetButtons />
       </main>

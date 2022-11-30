@@ -14,19 +14,17 @@ function numsToUTF16Transformer() {
   return Array.from(Array(26)).map((e, i) => i + 65)
 }
 
-function AlphabetButtonGenerator() {
+function AlphabetButtons() {
+  const disableButton = (event) => {
+    event.currentTarget.disabled = true
+  }
   const alphabet = numsToUTF16Transformer().map((x) => String.fromCharCode(x))
   const liAlphabet = alphabet.map((letter) => (
     <li key={letter}>
-      <button onClick={handleClick}>{letter}</button>
+      <button onClick={disableButton}>{letter}</button>
     </li>
   ))
   return <ul>{liAlphabet}</ul>
-}
-
-const handleClick = (event) => {
-  event.currentTarget.disabled = true
-  console.log('button clicked')
 }
 
 export function App() {
@@ -46,7 +44,7 @@ export function App() {
           <li>{game}</li>
           <li>{game}</li>
         </ul>
-        <AlphabetButtonGenerator />
+        <AlphabetButtons />
       </main>
     </>
   )

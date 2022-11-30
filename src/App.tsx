@@ -2,9 +2,7 @@ import React, { useState } from 'react'
 import wordsArray from './words.json'
 
 const randomWord = wordsArray[Math.floor(Math.random() * wordsArray.length)]
-
 // function RandomWordGenerator() {
-
 //   // return (
 //   //   <ul>
 //   //     <li>{wordsArray[Math.floor(Math.random() * wordsArray.length)]}</li>
@@ -12,15 +10,23 @@ const randomWord = wordsArray[Math.floor(Math.random() * wordsArray.length)]
 //   // )
 // }
 
-function AlphabetGenerator() {
-  const alphaArray = Array.from(Array(26)).map((e, i) => i + 65) // <-- transforms number to UTF-16 character
-  const alphabet = alphaArray.map((x) => String.fromCharCode(x))
+function numsToUTF16Transformer() {
+  return Array.from(Array(26)).map((e, i) => i + 65)
+}
+
+function AlphabetButtonGenerator() {
+  const alphabet = numsToUTF16Transformer().map((x) => String.fromCharCode(x))
   const liAlphabet = alphabet.map((letter) => (
     <li key={letter}>
-      <button onClick={setGame}>{letter}</button>
+      <button onClick={handleClick}>{letter}</button>
     </li>
   ))
   return <ul>{liAlphabet}</ul>
+}
+
+const handleClick = (event) => {
+  event.currentTarget.disabled = true
+  console.log('button clicked')
 }
 
 export function App() {
@@ -30,6 +36,7 @@ export function App() {
       <h1>Do you want to build a snowman?</h1>
       <main className="d-flex">
         <img src="/snowman-images/step_7.png" height="300px"></img>
+        <div>{randomWord}</div>
         <ul>
           <li>{game}</li>
           <li>{game}</li>
@@ -39,7 +46,7 @@ export function App() {
           <li>{game}</li>
           <li>{game}</li>
         </ul>
-        <AlphabetGenerator />
+        <AlphabetButtonGenerator />
       </main>
     </>
   )
@@ -56,4 +63,4 @@ export function App() {
 //
 //  Method to return the index number of where a button matches a letter within .randomWord
 //
-//  Display the letter (with the corresponding index) on the game board
+//  Display the letter (utilizing the corresponding index) on the game board

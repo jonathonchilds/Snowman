@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import wordsArray from './words.json'
 
+const randomWord =
+  wordsArray[Math.floor(Math.random() * wordsArray.length)].toUpperCase()
+
 export function App() {
-  // state & setState used for the selected Random Word?
   // updated the state with letters missing and re-render
 
-  const randomWord = wordsArray[Math.floor(Math.random() * wordsArray.length)]
+  const [guesses, setGuesses] = useState<string[]>([])
 
   // function compareClickWithRandomWord() {
   //   //  Compare each button press to if that value is contained within .randomWord: string
@@ -23,19 +25,35 @@ export function App() {
       .map((x) => String.fromCharCode(x))
       .map((letter) => (
         <li key={letter}>
-          <button onClick={assignKey}>{letter}</button>
+          <button disabled={guesses.includes(letter)} onClick={assignKey}>
+            {letter}
+          </button>
         </li>
       ))
     return <ul>{liAlphabet}</ul>
 
-    function assignKey(event) {
+    //const guessedWordArray = []
+
+    function assignKey(event: React.MouseEvent<HTMLButtonElement>) {
       event.preventDefault()
-      event.currentTarget.disabled = true
-      const letter = event.target.innerText
-      if (randomWord.includes(letter.toLowerCase())) {
-        console.log(letter)
-      } else console.log('nope')
+      // event.currentTarget.disabled = true
+      const letter = event.currentTarget.innerText
+
+      setGuesses([...guesses, letter])
+
+      // if (randomWord.includes(letter.toLowerCase())) {
+      //   for (let i = 0; i < randomWord.length; i++) {
+      //     if (randomWord[i] == letter.toLowerCase()) {
+      //       setWord(word.insert(i, letter))
+      //     }
+      //   }
+      // }
+      // turn the box red
     }
+
+    //console.log(guessedWordArray)
+    // function transformClassName(letter: string): string | undefined {
+    //   if (letter) }
 
     // do I need to make the ID a parameter of the object, assignKey?
   }
@@ -45,15 +63,10 @@ export function App() {
       <h1>Do you want to build a snowman?</h1>
       <main className="d-flex">
         <img src="/snowman-images/step_7.png" height="300px"></img>
-        <div>{randomWord}</div>
         <ul>
-          <li>_</li>
-          <li>_</li>
-          <li>_</li>
-          <li>_</li>
-          <li>_</li>
-          <li>_</li>
-          <li>_</li>
+          {randomWord.split('').map((letter, i) => (
+            <li key={i}>{guesses.includes(letter) ? letter : '_'}</li>
+          ))}
         </ul>
         <AlphabetButtons />
       </main>

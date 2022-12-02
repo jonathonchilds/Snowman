@@ -14,7 +14,7 @@ export function App() {
   //   //
   //   //  Method to return the index number of where a button matches a letter within .randomWord
   //   //
-  //   //  Display the letter (utilizing the matching index) on the game board
+  //   //  Display the letter (utilizing the corresponding index) on the game board
   // }
 
   function AlphabetButtons() {
@@ -28,10 +28,8 @@ export function App() {
       ))
     return <ul>{liAlphabet}</ul>
 
-    function assignKey(event: {
-      currentTarget: { disabled: boolean }
-      target: { innerText: any }
-    }): void {
+    function assignKey(event) {
+      event.preventDefault()
       event.currentTarget.disabled = true
       const letter = event.target.innerText
       if (randomWord.includes(letter.toLowerCase())) {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import wordsArray from './words.json'
 
 export function App() {
@@ -14,7 +14,7 @@ export function App() {
   //   //
   //   //  Method to return the index number of where a button matches a letter within .randomWord
   //   //
-  //   //  Display the letter (utilizing the corresponding index) on the game board
+  //   //  Display the letter (utilizing the matching index) on the game board
   // }
 
   function AlphabetButtons() {
@@ -28,7 +28,10 @@ export function App() {
       ))
     return <ul>{liAlphabet}</ul>
 
-    function assignKey(event) {
+    function assignKey(event: {
+      currentTarget: { disabled: boolean }
+      target: { innerText: any }
+    }): void {
       event.currentTarget.disabled = true
       const letter = event.target.innerText
       if (randomWord.includes(letter.toLowerCase())) {
@@ -38,12 +41,6 @@ export function App() {
 
     // do I need to make the ID a parameter of the object, assignKey?
   }
-
-  console.log()
-
-  // if (randomWord.includes(usable)) {
-  //   console.log('yay')
-  // } else console.log(id)
 
   return (
     <>
@@ -66,11 +63,6 @@ export function App() {
   )
 }
 
-//  I'm trying to determine if a word returned by RandomWordGenerator is equal to what is guessed by the user,
-//  via the user pushing buttons.
-//
-//  How to get each button to recognize it's own value representation?
-//
 //  Compare each button press to if that value is contained within .randomWord: string
 //
 //  If it is, identify where (and grab that letter's index from .randomWord)
